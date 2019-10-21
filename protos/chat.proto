@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package chat;
+
+import "google/protobuf/timestamp.proto";
+
+service ChatService {
+    rpc StreamChat(stream ChatMessage) returns (stream ChatMessage) {}
+}
+
+message ChatMessage {
+    google.protobuf.Timestamp timestamp = 1;
+    string alias = 2;
+    string message = 3;
+}
