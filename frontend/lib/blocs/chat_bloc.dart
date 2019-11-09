@@ -4,7 +4,6 @@ import 'package:frontend/services/chat_service.dart';
 import 'package:frontend/services/service_locator.dart';
 import 'package:frontend/states/chat_state.dart';
 import 'base_bloc.dart';
-import 'dart:convert';
 
 class ChatBloc extends BaseBloc<ChatEvent, ChatState> {
   Stream<ChatMessage> _strm;
@@ -29,9 +28,6 @@ class ChatBloc extends BaseBloc<ChatEvent, ChatState> {
   }
 
   void send({String message}) async {
-    if (_strm == null)
-      initialize();
-
     await sl.get<ChatService>().send(message);
   }
 

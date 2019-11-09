@@ -28,6 +28,7 @@ dependencies:
   get_it: ^1.0.2
   protobuf: ^1.0.0
   grpc: ^2.1.2
+  intl: ^0.16.0
 
 dev_dependencies:
   flutter_test:
