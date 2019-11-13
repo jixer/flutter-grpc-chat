@@ -6,11 +6,24 @@ import 'package:frontend/blocs/chat_bloc.dart';
 import 'package:frontend/widgets/chatroom_messages_widget.dart';
 import 'package:frontend/widgets/send_chat_widget.dart';
 
-class ChatPage extends StatelessWidget {
+
+class ChatPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => ChatState();
+}
+
+class ChatState extends State<ChatPage> {
+
+  ChatBloc _chatBloc;
+  @override
+  void initState() {
+    super.initState();
+    _chatBloc = BlocProvider.of<ChatBloc>(context);
+    _chatBloc.initialize();
+  }
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<ChatBloc>(context).initialize();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chat Room'),
@@ -24,5 +37,11 @@ class ChatPage extends StatelessWidget {
         ],
       )
     );
+  }
+
+  @override
+  void dispose() {
+    _chatBloc.leave();
+    super.dispose();
   }
 }

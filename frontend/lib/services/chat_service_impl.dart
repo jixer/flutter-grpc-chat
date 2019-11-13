@@ -13,6 +13,7 @@ class ChatServiceImpl implements ChatService {
   String username;
 
   Future<bool> join({String username}) {
+    this.username = username;
     client = ChatServiceClient(GrpcChatClientSingleton().client);
     
     outboundController = StreamController<ChatMessage>();
@@ -29,6 +30,7 @@ class ChatServiceImpl implements ChatService {
     var msg = ChatMessage();
     msg.message = message;
     msg.timestamp = Timestamp.fromDateTime(DateTime.now());
+    msg.alias = username;
 
     outboundController.add(msg);
 

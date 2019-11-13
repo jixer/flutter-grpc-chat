@@ -31,6 +31,11 @@ class ChatBloc extends BaseBloc<ChatEvent, ChatState> {
     await sl.get<ChatService>().send(message);
   }
 
+  void leave() async {
+    await sl.get<ChatService>().leave();
+    _strm = null;
+  }
+
   void initialize() {
     if (_strm == null) {
       _strm = sl.get<ChatService>().subscribe();
